@@ -1,0 +1,11 @@
+*.7z
+*.rar
+*.tar
+*.zip
+
+*.pdf
+*.docx
+*.csv
+
+
+testesDF.py
