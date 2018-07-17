@@ -1,2 +1,2 @@
 # pet-data
-Visualization of teacher's  assessments data
+Visualização de dados resultantes de avaliações de professores.
