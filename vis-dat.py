@@ -11,7 +11,7 @@ for h in header[2:-1]:
     #replaces commas with dots for floats
     df[h] = df[h].str.replace(",",".")
     #converts everything to float
-    df[h] = df[h].astype(float)
+    df[h].apply(lambda x: type(x)==str and float(x))
 
 if __name__ == "__main__":
     print(df)
