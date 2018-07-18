@@ -19,9 +19,7 @@ for h in header[2:-1]:
 
 ## group question results by subject and class ##
 df_di_tu = df.groupby(['Disciplina', 'Turma'])
-#df_di = df.groupby(['Disciplina'])
 mean_di_tu = {}
-#mean_di = {}
 for group in df_di_tu:
     mean_di_tu[group[0]] = group[1].mean()
 
