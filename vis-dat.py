@@ -24,8 +24,6 @@ mean_di_tu = {}
 #mean_di = {}
 for group in df_di_tu:
     mean_di_tu[group[0]] = group[1].mean()
-for group in df_di:
-    mean_di[group[0]] = group[1].mean()
 
 ## creates new dataframe to hold means only ##
 df_di_tu = pd.DataFrame(columns=header)
@@ -37,7 +35,6 @@ for key, value in mean_di_tu:
     valores = [key, value] + valores
     df_di_tu.loc[i] = valores
     i+=1
-
 
 
 
