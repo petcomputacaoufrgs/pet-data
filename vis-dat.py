@@ -38,24 +38,10 @@ for key, value in mean_di_tu:
     df_di_tu.loc[i] = valores
     i+=1
 
-print(df_di_tu)
-"""
-for h in header[2:-1]:
-    #mean_di_tu[h] = pd.concat(df['Disciplina', 'Turma'].groupby(['Turma']))
-    for group in turmas:
-        temp = pd.concat([temp, group[1]], axis=0)
-    print(temp)
-"""
-"""
-mean_di_tu = {}
-for h in header[2:-1]:
-    for group in df_di_tu:
-        #print(group[1]['Disciplina'])
-        #print(group[1][h])
-        mean_di_tu[h] = pd.concat([group[1]['Disciplina'], group[1][h]], axis=1)
-    print(mean_di_tu)
-"""
+
 
 
 if __name__ == "__main__":
     print(df)
+    print(df_di_tu)
+
