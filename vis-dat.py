@@ -20,11 +20,6 @@ for h in header[2:-1]:
 df_di_tu = df.groupby(['Disciplina', 'Turma'])
 df_di = df.groupby(['Disciplina'])
 
-#mean_di_tu = df.groupby(['Disciplina','Turma','TamTurma'])
-#mean_di = []
-
-
-
 
 
 turmas = df.groupby(['Turma'])
