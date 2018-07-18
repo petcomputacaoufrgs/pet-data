@@ -13,25 +13,22 @@ for h in header[2:-1]:
     #replaces commas with dots for floats
     df[h] = df[h].str.replace(",",".")
     #converts everything to float
-    df[h].apply(lambda x: type(x)==str and float(x))
+    df[h] = df[h].astype(float)
+    #df[h].apply(lambda(x): ((float(x)) if (type(x) == str)))
 
 
 #group question results by subject and class
 df_di_tu = df.groupby(['Disciplina', 'Turma'])
 df_di = df.groupby(['Disciplina'])
 
+mean_di_tu = {}
+mean_di = {}
+for group in df_di_tu:
+    mean_di_tu[group[0]] = group[1].mean()
+for group in df_di:
+    mean_di[group[0]] = group[1].mean()
 
-
-turmas = df.groupby(['Turma'])
-for group in turmas:
-    print(len(group))
-    #novo = pd.concat([group[1]['Disciplina'].groupby(['Disciplina']), group[1]['Turma'].groupby(['Turma'])], axis=0)
-    #print(novo)
-    print(group[1]['Q2'].mean())
-    novo = pd.concat([group[1]['Q1'], group[1]['Q2']], axis=1)
-    print(novo)
-    novo = pd.concat([novo, group[1]['Q2'].mean], axis=1)
-    print(novo)
+for key, value in mean_di_tu:
 
 
 
