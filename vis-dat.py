@@ -1,11 +1,10 @@
 #import numpy as np
 import pandas as pd
 
+
 df = pd.read_csv('AvalDiscente_20xx-x.csv', sep=';', error_bad_lines=False)
 
 header = list(df.columns.values) #list with column names
-
-agl = []
 
 for h in header[2:-1]:
     #replaces NaN values with None
@@ -43,4 +42,5 @@ for key, value in mean_di_tu:
 if __name__ == "__main__":
     print(df)
     print(df_di_tu)
-
+    #df_di_tu.plot.barh(stacked=True)
+    df_di_tu.plot.barh(x=df_di_tu['Turma'], stacked=True)
