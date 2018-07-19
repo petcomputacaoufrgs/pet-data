@@ -21,6 +21,7 @@ for h in header[2:-1]:
 df_di_tu = df.groupby(['Disciplina', 'Turma'])
 mean_di_tu = {}
 for group in df_di_tu:
+    #assigns to key (subjects, class) the mean value of each question
     mean_di_tu[group[0]] = group[1].mean()
 
 ## creates new dataframe to hold means only ##
@@ -28,9 +29,12 @@ df_di_tu = pd.DataFrame(columns=header)
 i=0
 for key, value in mean_di_tu:
     valores = []
+    #makes a list of all mean values
     for v in mean_di_tu[(key, value)]:
         valores.append(v)
+    #concatenates with the key
     valores = [key, value] + valores
+    #new row for each class
     df_di_tu.loc[i] = valores
     i+=1
 
