@@ -7,5 +7,6 @@
 *.docx
 *.csv
 
+.ipynb_checkpoints/
 
 testesDF.py
