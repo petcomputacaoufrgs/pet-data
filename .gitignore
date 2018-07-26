@@ -3,6 +3,7 @@
 *.tar
 *.zip
 
+*.jpg
 *.pdf
 *.docx
 *.csv

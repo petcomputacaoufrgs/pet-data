@@ -1,6 +1,7 @@
 #import numpy as np
 import pandas as pd
-
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 df = pd.read_csv('AvalDiscente_20xx-x.csv', sep=';', error_bad_lines=False)
 
@@ -17,14 +18,14 @@ for h in header[2:-1]:
 
 
 ## group question results by subject and class ##
-df_di_tu = df.groupby(['Disciplina', 'Turma'])
+df_disc_tur = df.groupby(['Disciplina', 'Turma'])
 mean_di_tu = {}
-for group in df_di_tu:
+for group in df_disc_tur:
     #assigns to key (subjects, class) the mean value of each question
     mean_di_tu[group[0]] = group[1].mean()
 
 ## creates new dataframe to hold means only ##
-df_di_tu = pd.DataFrame(columns=header)
+df_disc_tur = pd.DataFrame(columns=header)
 i=0
 for key, value in mean_di_tu:
     valores = []
@@ -34,13 +35,23 @@ for key, value in mean_di_tu:
     #concatenates with the key
     valores = [key, value] + valores
     #new row for each class
-    df_di_tu.loc[i] = valores
+    df_disc_tur.loc[i] = valores
     i+=1
 
+df_plot_box = df.copy()
+del df_plot_box['TamTurma']
 
-
+for h in header[2:-1]:
+    plotFileNameT = h + "-turmas.jpg"
+    plotFileNameD = h + "-disciplinas.jpg"
+    fig, ax = plt.subplots(figsize=(20,20))
+    boxPlotT = sns.boxplot(ax=ax, x='Disciplina', y=h, data=df, width=0.5,
+                          palette="colorblind", linewidth=2.5, hue='Turma')
+    fig, ax = plt.subplots(figsize=(20,20))
+    boxPlotT.figure.savefig(plotFileNameT, format='jpeg', dpi=100)
+    boxPlotD = sns.boxplot(ax=ax, x='Disciplina', y=h, data=df, width=0.5,
+                          palette="colorblind", linewidth=2.5)
+    boxPlotD.figure.savefig(plotFileNameD, format='jpeg', dpi=100)
+    
 if __name__ == "__main__":
-    print(df)
-    print(df_di_tu)
-    #df_di_tu.plot.barh(stacked=True)
-    df_di_tu.plot.barh(x=df_di_tu['Turma'], stacked=True)
+    pass
