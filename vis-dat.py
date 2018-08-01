@@ -52,6 +52,6 @@ for h in header[2:-1]:
     boxPlotD = sns.boxplot(ax=ax, x='Disciplina', y=h, data=df, width=0.5,
                           palette="colorblind", linewidth=2.5)
     boxPlotD.figure.savefig(plotFileNameD, format='jpeg', dpi=100)
-    
+
 if __name__ == "__main__":
     pass
