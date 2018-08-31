@@ -110,7 +110,11 @@ def scatterPlot(df, header):
 #############################################################################################################################################
 
 def boxPlot(df, header):
-
+    disciplinas = []
+    for d in list(df['Disciplina']):
+        if d not in disciplinas:
+            disciplinas.append(d)
+    disciplinas = quebraListaStrings(disciplinas)
     plt.clf()
     for h in header[2:-1]:
         plotFileNameT = "Box Plot - " + h + "-turmas.png"
@@ -118,10 +122,12 @@ def boxPlot(df, header):
         fig, ax = plt.subplots(figsize=(15, 15))
         boxPlotT = sns.boxplot(ax=ax, x='Disciplina', y=h, data=df, width=0.5,
                                palette="colorblind", linewidth=2.5, hue='Turma')
+        ax.set_xticklabels(disciplinas)
         fig, ax = plt.subplots(figsize=(15, 15))
         boxPlotT.figure.savefig(plotFileNameT, format='png', dpi=100)
         boxPlotD = sns.boxplot(ax=ax, x='Disciplina', y=h, data=df, width=0.5,
                                palette="colorblind", linewidth=2.5)
+        ax.set_xticklabels(disciplinas)
         boxPlotD.figure.savefig(plotFileNameD, format='png', dpi=100)
 
     print('Box plots gerados. \n')
@@ -173,17 +179,19 @@ def hBarPlot(df, header):
     del df_medias_disciplinas['TamTurma']  # remove o TamTurma para não ser plotado
     df_medias_disciplinas = df_medias_disciplinas.round(3)  # arredonda as médias para 3 casas decimais
 
-    plt.figure(figsize=(8, 6))
+    tempList = df_medias_disciplinas.index.tolist()
+    tempList = quebraListaStrings(tempList)
+    df_medias_disciplinas.index = tempList
+
+    plt.figure(figsize=(10, 8))
     fig, ax = plt.subplots()
     ax.axvline(x=44, linewidth=2, color='r')  # linha vermelha no 44 (valor caso todas questões tenham a média 4)
+    df_medias_disciplinas.plot.barh(ax=ax, stacked=True, figsize=(12, 6), width=1,
+                colormap='Paired', edgecolor='White')
 
-    if __name__ == "__main__":
+    plt.tight_layout()
 
-        df_medias_disciplinas.plot.barh(ax=ax, stacked=True, figsize=(12, 6), width=1, colormap='Paired', edgecolor='White')
-        plt.savefig('Horizontal Bar Plot.png')
-
-    print('Horizontal bar plot gerado. \n')
-
+    plt.savefig('Horizontal Bar Plot.png')
 
 #############################################################################################################################################
 
